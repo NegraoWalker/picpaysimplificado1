@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Picpaysimplificado1Application {
+public class RunApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Picpaysimplificado1Application.class, args);
+		SpringApplication.run(RunApplication.class, args);
 	}
 
 }

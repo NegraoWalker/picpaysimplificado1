@@ -2,11 +2,14 @@ package com.walker.picpaysimplificado1.services;
 
 import com.walker.picpaysimplificado1.domain.user.User;
 import com.walker.picpaysimplificado1.domain.user.UserType;
+import com.walker.picpaysimplificado1.dtos.UserDto;
 import com.walker.picpaysimplificado1.respositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -32,5 +35,13 @@ public class UserService {
     }
 
 
+    public User createUser(UserDto userDto) {
+        User newUser = new User(userDto);
+        this.saveUser(newUser);
+        return newUser;
+    }
 
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
 }

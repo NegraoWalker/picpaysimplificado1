@@ -1,5 +1,6 @@
 package com.walker.picpaysimplificado1.domain.user;
 
+import com.walker.picpaysimplificado1.dtos.UserDto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -31,6 +32,15 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     private UserType userType; //dois tipos de usuários: comum e lojistas
+
+    public User(UserDto userDto) {
+        this.firstName = userDto.firstName();
+        this.lastName = userDto.lastName();
+        this.balance = userDto.balance();
+        this.userType = userDto.userType();
+        this.password = userDto.password();
+        this.email = userDto.email();
+    }
 
     public Long getId() {
         return id;

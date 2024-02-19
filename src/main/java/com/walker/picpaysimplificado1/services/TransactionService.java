@@ -26,8 +26,11 @@ public class TransactionService {
     @Autowired
     private RestTemplate restTemplate; //será usado para consumir o serviço autorizador externo https://run.mocky.io/v3/5794d450-d2e2-4412-8131-73d0293ac1cc
 
+    @Autowired
+    private NotificationService notificationService;
 
-    public void createTransaction(TransactionDto transactionDto){
+
+    public Transaction createTransaction(TransactionDto transactionDto){
         User sender = this.userService.findUserById(transactionDto.senderId()); //sender=payer
         User receiver = this.userService.findUserById(transactionDto.receiverId()); //receiver=payee
 
@@ -51,6 +54,11 @@ public class TransactionService {
         this.transactionRepository.save(newTransaction);
         this.userService.saveUser(sender);
         this.userService.saveUser(receiver);
+
+        this.notificationService.sendNotification(sender,"Transação realizada com sucesso!");
+        this.notificationService.sendNotification(receiver,"Transação realizada com sucesso!");
+
+        return newTransaction;
     }
 
     public boolean authorizeTransaction(User sender, BigDecimal value){ //Antes de finalizar a transferência, deve-se consultar um serviço autorizador externo, use este mock para simular (https://run.mocky.io/v3/5794d450-d2e2-4412-8131-73d0293ac1cc).

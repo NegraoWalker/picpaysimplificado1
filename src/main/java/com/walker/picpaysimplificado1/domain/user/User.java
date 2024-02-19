@@ -40,6 +40,7 @@ public class User {
         this.userType = userDto.userType();
         this.password = userDto.password();
         this.email = userDto.email();
+        this.document = userDto.document();
     }
 
     public Long getId() {
